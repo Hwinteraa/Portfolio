@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오</title>
+    <style>
+        /* 스타일 초기화 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #222;
+            background-color: #fafafa;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 1. 헤더 스타일 */
+        header {
+            background-color: #fff;
+            color: #2c3e50;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+            .nav-links a:hover {
+                color: #2c3e50;
+            }
+
+        /* 2. 자기소개 섹션 */
+        .profile-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #111827, #1f2933);
+            color: #fff;
+            text-align: center;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            background-color: #ddd;
+        }
+
+        .profile-text {
+            max-width: 600px;
+        }
+
+            .profile-text h1 {
+                font-size: 2.2rem;
+                margin-bottom: 20px;
+                color: #fff;
+            }
+
+            .profile-text p {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 0.8);
+                line-height: 1.5;
+                font-weight: 550;
+            }
+
+        .profile-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+            padding-bottom: 5px;
+            transition: border-color 0.3s;
+        }
+
+            .profile-link:hover {
+                border-color: #fff;
+            }
+
+
+        /* 3. 작품 소개 섹션 */
+        .projects-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 50px;
+            color: #111827;
+            font-weight: bold;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* 카드 스타일: a 태그로 변경되어도 문제없도록 이미 설정되어 있음 */
+        .project-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* 아래 속성들이 a 태그일 때 링크 밑줄을 없애고 박스처럼 보이게 함 */
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+            .project-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+            }
+
+        .project-img {
+            width: 100%;
+            height: 220px;
+            background-color: #ddd;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+            .project-info h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                color: #111827;
+            }
+
+            .project-info p {
+                font-size: 0.95rem;
+                color: #555;
+                line-height: 1.5;
+            }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        /* 4. 푸터 */
+        footer {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #111827;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        /* 반응형 미디어 쿼리 */
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-text h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* [BGM 플레이어 스타일] */
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* 로고와 플레이어 사이 간격 */
+        }
+
+        .bgm-container {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 5px 12px;
+            border-radius: 20px;
+            gap: 10px;
+        }
+
+        .bgm-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: color 0.3s;
+        }
+
+            .bgm-btn:hover {
+                color: #2563eb;
+            }
+
+        /* 볼륨 슬라이더 꾸미기 */
+        .vol-slider {
+            width: 60px; /* 슬라이더 길이 */
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none; /* 기본 스타일 제거 */
+        }
+
+            .vol-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #2c3e50;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-left">
+                    <div class="logo">My Portfolio</div>
+
+                    <div class="bgm-container">
+                        <audio id="bgmAudio" loop>
+                            <source src="bgm.mp3" type="audio/mp3">
+                        </audio>
+
+                        <button id="bgmBtn" class="bgm-btn" title="음악 재생/정지">
+                            ▶
+                        </button>
+
+                        <input type="range" id="volSlider" class="vol-slider" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                </div>
+
+                <div class="nav-links">
+                    <a href="#about">소개</a>
+                    <a href="#projects">작품</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about" class="profile-section">
+        <div class="container profile-container">
+            <img src="https://pbs.twimg.com/media/G9SDON8aYAAWBRL?format=png&name=240x240" alt="프로필 사진" class="profile-img">
+
+            <div class="profile-text">
+                <h1>개발자의 언어로 소통하는 아티스트</h1>
+                <p>
+                    단순히 그림을 그리는 것을 넘어, 게임 엔진 속 살아 숨 쉬는 아트를 지향합니다.<br>
+                    5번의 팀 프로젝트를 통해 개발자와의 소통 노하우를 쌓았으며,<br>
+                    Unity 및 C++, html 등 기초 지식을 바탕으로 최적화된 리소스를 제작합니다.
+                </p>
+                <a href="#projects" class="profile-link">작품 보러가기 →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+
+            <div class="projects-grid">
+                <!--<a href="project1.html" class="project-card" target="_blank">-->
+                <a href="https://hwinteraa.github.io/ColorTile/" class="project-card" target="_blank">
+                    <img src="img/1.png" alt="작품1 이미지" class="project-img">
+                    <div class="project-info">
+                        <h3>색깔 맞추기 게임</h3>
+                        <p>주어진 색상 코드를 보고 정답을 맞추는 웹 게임입니다. HTML, CSS, JavaScript를 활용하여 제작했습니다.</p>
+                        <span class="btn-link">자세히 보기</span>
+                    </div>
+                </a>
+
+                <a href="https://youtu.be/avsA5r3pKdA" class="project-card" target="_blank">
+                    <img src="img/2.png" alt="작품2 이미지" class="project-img">
+                    <div class="project-info">
+                        <h3>힐링 게임 'Cotton'</h3>
+                        <p>솜사탕을 모티브로 한 캐릭터가 등장하는 힐링 게임 기획안 및 스토리보드입니다. AI를 활용한 영상을 제작했습니다. </p>
+                        <span class="btn-link">자세히 보기</span>
+                    </div>
+                </a>
+
+                <a href="Gallery/G.html" class="project-card" target="_blank">
+                    <img src="img/3.png" alt="작품3 이미지" class="project-img">
+                    <div class="project-info">
+                        <h3>개인 웹 사이트</h3>
+                        <p>여러 프로젝트로 제작한 작업물들을 하나의 웹 사이트에 담았습니다.</p>
+                        <span class="btn-link">자세히 보기</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 홍길동. All rights reserved.
+    </footer>
+
+    <script>
+    // BGM 관련 요소 가져오기
+    const bgmAudio = document.getElementById('bgmAudio');
+    const bgmBtn = document.getElementById('bgmBtn');
+    const volSlider = document.getElementById('volSlider');
+
+    // 아이콘 모양 설정
+    const iconPlay = '▶';
+    const iconPause = '⏸';
+
+    // 1. 초기 볼륨 설정
+    bgmAudio.volume = 0.5;
+
+    // 2. 재생/일시정지 버튼 클릭 기능
+    bgmBtn.addEventListener('click', function() {
+        if (bgmAudio.paused) {
+            bgmAudio.play();
+            bgmBtn.innerHTML = iconPause; // 아이콘을 일시정지로 변경
+        } else {
+            bgmAudio.pause();
+            bgmBtn.innerHTML = iconPlay; // 아이콘을 재생으로 변경
+        }
+    });
+
+    // 3. 볼륨 슬라이더 조절 기능
+    volSlider.addEventListener('input', function() {
+        bgmAudio.volume = this.value;
+    });
+
+    // 4. (선택사항) 사이트 로드 시 자동 재생 시도
+    // 주의: 브라우저 정책상 실패할 수 있음. 실패하면 그냥 멈춤 상태로 둠.
+    window.addEventListener('load', function() {
+        bgmAudio.play().then(() => {
+            // 자동 재생 성공 시 아이콘 변경
+            bgmBtn.innerHTML = iconPause;
+        }).catch(error => {
+            // 자동 재생 차단됨 (사용자가 직접 눌러야 함)
+            console.log("자동 재생이 차단되었습니다. 사용자가 플레이 버튼을 눌러야 합니다.");
+            bgmBtn.innerHTML = iconPlay;
+        });
+    });
+    </script>
+</body>
+</html>
+
